@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Presença</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        li {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .present {
+            background: #d4edda;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Confirmação de Presença</h1>
+        <input type="text" id="guestName" placeholder="Digite o nome do convidado">
+        <button onclick="confirmPresence()">Confirmar Presença</button>
+        <ul id="guestList"></ul>
+    </div>
+
+    <script>
+        const guests = ['Ana', 'Carlos', 'João', 'Maria', 'Paula']; // Lista de convidados
+        const confirmedGuests = [];
+
+        function confirmPresence() {
+            const input = document.getElementById('guestName');
+            const name = input.value.trim();
+            const guestList = document.getElementById('guestList');
+
+            if (!name) {
+                alert('Por favor, insira um nome.');
+                return;
+            }
+
+            if (guests.includes(name)) {
+                if (confirmedGuests.includes(name)) {
+                    alert(`${name} já confirmou presença.`);
+                } else {
+                    confirmedGuests.push(name);
+                    const listItem = document.createElement('li');
+                    listItem.textContent = name;
+                    listItem.classList.add('present');
+                    guestList.appendChild(listItem);
+                    alert(`${name} confirmou presença!`);
+                }
+            } else {
+                alert(`${name} não está na lista de convidados.`);
+            }
+
+            input.value = '';
+            input.focus();
+        }
+    </script>
+</body>
+</html>
